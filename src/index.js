@@ -43,10 +43,11 @@ function showTemperature(response) {
   let temperatureNow = document.querySelector("#temperature-now");
   temperatureNow.innerHTML = celsiusTemperature;
 
-  console.log(response.data);
-
   let weatherDescription = document.querySelector("#weather-description");
   weatherDescription.innerHTML = response.data.weather[0].description;
+
+  let windSpeed = document.querySelector("#wind-speed");
+  windSpeed.innerHTML = Math.round(response.data.wind.speed * 3.6);
 
   styleUnselectedComponent("#fahrenheit-scale");
   styleSelectedComponent("#celsius-scale");
@@ -130,6 +131,9 @@ function showCurrentLocation(response) {
 
   let weatherDescription = document.querySelector("#weather-description");
   weatherDescription.innerHTML = response.data.weather[0].description;
+
+  let windSpeed = document.querySelector("#wind-speed");
+  windSpeed.innerHTML = Math.round(response.data.wind.speed * 3.6);
 
   styleUnselectedComponent("#fahrenheit-scale");
   styleSelectedComponent("#celsius-scale");
