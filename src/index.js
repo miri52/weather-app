@@ -43,6 +43,11 @@ function showTemperature(response) {
   let temperatureNow = document.querySelector("#temperature-now");
   temperatureNow.innerHTML = celsiusTemperature;
 
+  console.log(response.data);
+
+  let weatherDescription = document.querySelector("#weather-description");
+  weatherDescription.innerHTML = response.data.weather[0].description;
+
   styleUnselectedComponent("#fahrenheit-scale");
   styleSelectedComponent("#celsius-scale");
   makeLink("#fahrenheit-scale", "F");
@@ -122,6 +127,10 @@ function showCurrentLocation(response) {
   h1.innerHTML = response.data.name;
   let temperatureNow = document.querySelector("#temperature-now");
   temperatureNow.innerHTML = Math.round(response.data.main.temp);
+
+  let weatherDescription = document.querySelector("#weather-description");
+  weatherDescription.innerHTML = response.data.weather[0].description;
+
   styleUnselectedComponent("#fahrenheit-scale");
   styleSelectedComponent("#celsius-scale");
   makeLink("#fahrenheit-scale", "F");
