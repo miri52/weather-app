@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="src/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <section class="wireframe">
+        <div class="search">
+          <form id="search-form">
+            <div class="form-row align-items-center">
+              <div class="col-auto">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter a city"
+                  autocomplete="off"
+                  autofocus="on"
+                  id="search-city-input"
+                />
+              </div>
+              <div class="col-auto">
+                <input
+                  type="submit"
+                  value="Search"
+                  class="form-control btn btn-info"
+                />
+              </div>
+              <div class="col-auto">
+                <button
+                  type="submit"
+                  class="btn btn-secondary"
+                  id="current-location-button"
+                >
+                  Current
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="location-info-now">
+          <h1>Your city</h1>
+          <p id="current-day-and-time"></p>
+          <h2>
+            Now
+          </h2>
+          <div class="row">
+            <div class="col-6">
+              <div class="clearfix">
+                <img
+                  class="float-left weather-icon-now"
+                  src="images/snow.png"
+                  alt="snow"
+                />
+                <p id="temperature-now">-</p>
+                <ul class="temperature-scale">
+                  <li id="celsius-scale">
+                    °C
+                  </li>
+                  <li>|</li>
+                  <li id="fahrenheit-scale">
+                    °F
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-6">
+              <p class="proverb">
+                <strong>No snowflake ever falls in the wrong place.</strong
+                ><br />-Zen proverb
+              </p>
+            </div>
+          </div>
+          <p class="state-now">
+            Snow
+            <br />
+            Wind: 9km/hr
+          </p>
+        </div>
+
+        <div class="location-info-next-days">
+          <h2>Next days</h2>
+          <div class="row">
+            <div class="col next-days">
+              <div class="day">Thursday</div>
+              <div class="weather-icons">
+                <img src="images/snow.png" alt="snow" />
+              </div>
+              <div class="temperature">
+                <span class="max-temperature">-2</span>
+                <span class="min-temperature">-6</span>
+              </div>
+            </div>
+
+            <div class="col next-days">
+              <div class="day">Friday</div>
+              <div class="weather-icons">
+                <img src="images/day_sleet.png" alt="sleet" />
+              </div>
+              <div class="temperature">
+                <span class="max-temperature">3</span>
+                <span class="min-temperature">-2</span>
+              </div>
+            </div>
+
+            <div class="col next-days">
+              <div class="day">Saturday</div>
+              <div class="weather-icons">
+                <img src="images/day_clear.png" alt="sunny" />
+              </div>
+              <div class="temperature">
+                <span class="max-temperature">6</span>
+                <span class="min-temperature">1</span>
+              </div>
+            </div>
+
+            <div class="col next-days">
+              <div class="day">Sunday</div>
+              <div class="weather-icons">
+                <img src="images/day_clear.png" alt="sunny" />
+              </div>
+              <div class="temperature">
+                <span class="max-temperature">4</span>
+                <span class="min-temperature">-2</span>
+              </div>
+            </div>
+
+            <div class="col next-days">
+              <div class="day">Monday</div>
+              <div class="weather-icons">
+                <img src="images/day_snow.png" alt="lightsnow" />
+              </div>
+              <div class="temperature">
+                <span class="max-temperature">-1</span>
+                <span class="min-temperature">-5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="src/index.js"></script>
+  </body>
+</html>
