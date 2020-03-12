@@ -49,6 +49,13 @@ function showTemperature(response) {
   let windSpeed = document.querySelector("#wind-speed");
   windSpeed.innerHTML = Math.round(response.data.wind.speed * 3.6);
 
+  let weatherIcon = document.querySelector("#weather-icon");
+  weatherIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  weatherIcon.setAttribute("alt", response.data.weather[0].description);
+
   styleUnselectedComponent("#fahrenheit-scale");
   styleSelectedComponent("#celsius-scale");
   makeLink("#fahrenheit-scale", "F");
@@ -134,6 +141,13 @@ function showCurrentLocation(response) {
 
   let windSpeed = document.querySelector("#wind-speed");
   windSpeed.innerHTML = Math.round(response.data.wind.speed * 3.6);
+
+  let weatherIcon = document.querySelector("#weather-icon");
+  weatherIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  weatherIcon.setAttribute("alt", response.data.weather[0].description);
 
   styleUnselectedComponent("#fahrenheit-scale");
   styleSelectedComponent("#celsius-scale");
