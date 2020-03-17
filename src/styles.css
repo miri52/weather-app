@@ -52,16 +52,17 @@ li::first-letter {
   margin-right: 20px;
 }
 
-.day {
+.time {
   font-weight: bold;
+  font-size: 16px;
 }
 
-.next-days {
+.next-hours {
   margin: auto;
   display: block;
 }
 
-.next-days img {
+.next-hours img {
   width: 50px;
   height: 50px;
   margin: 10px 0;
