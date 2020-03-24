@@ -50,10 +50,15 @@ li::first-letter {
   padding-left: 20px;
 }
 
-.proverb {
+.proverb-section {
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
   margin-right: 20px;
+}
+
+#proverb {
+  font-weight: 600;
+  font-size: 24px;
 }
 
 .time {

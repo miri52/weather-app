@@ -1,3 +1,70 @@
+let proverbs = {
+  snow: {
+    saying: "No snowflake ever falls in the wrong place.",
+    author: "-Zen proverb"
+  },
+  rain: {
+    saying: "The sound of rain needs no translation.",
+    author: "-Zen proverb"
+  },
+  sun: {
+    saying: "Turn your face to the sun and the shadows fall behind you.",
+    author: "-Maori proverb"
+  },
+  clouds: {
+    saying: "A cloudy sky doesn't always cry rain.",
+    author: "-African proverb"
+  },
+  storm: {
+    saying: "A tree with strong roots laughs at storms.",
+    author: "-Malay Proverb"
+  },
+  mist: {
+    saying: "Words are the fog one has to see through.",
+    author: "-Zen proverb"
+  },
+  default: {
+    saying: "After bad weather comes good weather.",
+    author: "-Maltese Proverb"
+  }
+};
+
+function showProverb(mainDescription) {
+  let proverbElement = document.querySelector("#proverb");
+  let authorElement = document.querySelector("#author");
+  switch (mainDescription) {
+    case "clouds":
+      proverbElement.innerHTML = proverbs.clouds.saying;
+      authorElement.innerHTML = proverbs.clouds.author;
+      break;
+    case "snow":
+      proverbElement.innerHTML = proverbs.snow.saying;
+      authorElement.innerHTML = proverbs.snow.author;
+      break;
+    case "rain":
+    case "drizzle":
+      proverbElement.innerHTML = proverbs.rain.saying;
+      authorElement.innerHTML = proverbs.rain.author;
+      break;
+    case "clear":
+      proverbElement.innerHTML = proverbs.sun.saying;
+      authorElement.innerHTML = proverbs.sun.author;
+      break;
+    case "thunderstorm":
+      proverbElement.innerHTML = proverbs.storm.saying;
+      authorElement.innerHTML = proverbs.storm.author;
+      break;
+    case "mist":
+    case "fog":
+      proverbElement.innerHTML = proverbs.mist.saying;
+      authorElement.innerHTML = proverbs.mist.author;
+      break;
+    default:
+      proverbElement.innerHTML = proverbs.default.saying;
+      authorElement.innerHTML = proverbs.default.author;
+  }
+}
+
 function formatDate(timestamp) {
   let now = new Date(timestamp);
   let days = [
@@ -102,6 +169,9 @@ function showCurrentWeather(response) {
   styleSelectedComponent("#celsius-scale");
   makeLink("#fahrenheit-scale", "F");
   removeLink("#celsius-scale", "C");
+
+  let mainDescription = response.data.weather[0].main;
+  showProverb(mainDescription.toLowerCase());
 }
 
 let searchForm = document.querySelector("#search-form");
@@ -243,6 +313,9 @@ function showCurrentLocation(response) {
   styleSelectedComponent("#celsius-scale");
   makeLink("#fahrenheit-scale", "F");
   removeLink("#celsius-scale", "C");
+
+  let mainDescription = response.data.weather[0].main;
+  showProverb(mainDescription.toLowerCase());
 }
 
 function getCurrentPosition() {
