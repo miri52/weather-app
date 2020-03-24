@@ -28,6 +28,10 @@ ul {
   padding-left: 0;
 }
 
+#last-updated {
+  font-size: 12px;
+}
+
 li::first-letter {
   text-transform: capitalize;
 }

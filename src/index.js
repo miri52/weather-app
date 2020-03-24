@@ -1,20 +1,28 @@
-let now = new Date();
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday"
-];
+function formatDate(timestamp) {
+  let now = new Date(timestamp);
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ];
 
-let day = days[now.getDay()];
-let hours = now.getHours();
-let minutes = (now.getMinutes() < 10 ? "0" : "") + now.getMinutes();
+  let day = days[now.getDay()];
+  let hours = now.getHours();
+  let minutes = (now.getMinutes() < 10 ? "0" : "") + now.getMinutes();
 
-let currentDayAndTime = document.querySelector("#current-day-and-time");
-currentDayAndTime.innerHTML = `${day} ${hours}:${minutes}`;
+  return `${day} ${hours}:${minutes}`;
+}
+
+function formatHours(timestamp) {
+  let now = new Date(timestamp);
+  let hours = now.getHours();
+  let minutes = (now.getMinutes() < 10 ? "0" : "") + now.getMinutes();
+  return `${hours}:${minutes}`;
+}
 
 function showForecast(response) {
   let forecast = document.querySelector("#forecast");
@@ -25,7 +33,7 @@ function showForecast(response) {
     forecastDetails = response.data.list[i];
     forecast.innerHTML += `
    <div class="col next-hours">
-              <h3 class="time"></h3>
+              <h3 class="time">${formatHours(forecastDetails.dt * 1000)}</h3>
               <img class="weather-icons" src="http://openweathermap.org/img/wn/${
                 forecastDetails.weather[0].icon
               }@2x.png" alt="${forecastDetails.weather[0].description}" />
@@ -54,7 +62,7 @@ function searchCity(event) {
     .join(" ");
   h1.innerHTML = cityTitle;
   let url = getCityApiUrl(cityInput.value);
-  axios.get(url).then(showTemperature);
+  axios.get(url).then(showCurrentWeather);
   /*.catch(function(error) {
       console.log(error);
     }); */
@@ -64,7 +72,12 @@ function searchCity(event) {
   axios.get(forecastUrl).then(showForecast);
 }
 
-function showTemperature(response) {
+function showCurrentWeather(response) {
+  let lastUpdated = document.querySelector("#last-updated");
+  lastUpdated.innerHTML = `Last updated: ${formatDate(
+    response.data.dt * 1000
+  )}`;
+
   currentTemperature = Math.round(response.data.main.temp);
   let temperatureNow = document.querySelector("#temperature-now");
   temperatureNow.innerHTML = currentTemperature;
@@ -169,7 +182,7 @@ function showGeoForecast(response) {
     forecastDetails = response.data.list[i];
     forecast.innerHTML += `
    <div class="col next-hours">
-              <h3 class="time"></h3>
+              <h3 class="time">${formatHours(forecastDetails.dt * 1000)}</h3>
               <img class="weather-icons" src="http://openweathermap.org/img/wn/${
                 forecastDetails.weather[0].icon
               }@2x.png" alt="${forecastDetails.weather[0].description}" />
@@ -200,6 +213,12 @@ function showPosition(position) {
 function showCurrentLocation(response) {
   let h1 = document.querySelector("h1");
   h1.innerHTML = response.data.name;
+
+  let lastUpdated = document.querySelector("#last-updated");
+  lastUpdated.innerHTML = `Last updated: ${formatDate(
+    response.data.dt * 1000
+  )}`;
+
   let temperatureNow = document.querySelector("#temperature-now");
   currentTemperature = Math.round(response.data.main.temp);
   temperatureNow.innerHTML = currentTemperature;
