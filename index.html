@@ -57,7 +57,7 @@
             Now
           </h2>
           <div class="row">
-            <div class="col-6">
+            <div class="col">
               <div class="clearfix">
                 <img
                   class="float-left weather-icon-now"
@@ -65,19 +65,17 @@
                   alt=""
                   id="weather-icon"
                 />
-                <p id="temperature-now"></p>
-                <ul class="temperature-scale">
-                  <li id="celsius-scale">
-                    °C
-                  </li>
-                  <li>|</li>
-                  <li id="fahrenheit-scale">
-                    °F
-                  </li>
-                </ul>
+                <div class="float-left">
+                  <strong id="temperature-now"></strong>
+                  <span class="temperature-scale" id="celsius-scale">°C</span>
+                  <span>|</span>
+                  <span class="temperature-scale" id="fahrenheit-scale"
+                    >°F</span
+                  >
+                </div>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col">
               <p class="proverb-section">
                 <span id="proverb"></span>
                 <br />
