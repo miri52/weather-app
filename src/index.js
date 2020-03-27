@@ -87,43 +87,61 @@ function formatHours(timestamp) {
   return `${hours}:${minutes}`;
 }
 
-function showSearchForecast(response) {
-  showForecastData(response);
+let apiKey = "f39b4d69b61752ac1179fb7a3b6a8e55";
+let apiUrl = "https://api.openweathermap.org/data/2.5/";
+
+function getCityApiUrl(cityInput) {
+  return `${apiUrl}weather?q=${cityInput}&appid=${apiKey}&units=metric`;
+}
+
+function getGeoApiUrl(lat, lon) {
+  return `${apiUrl}weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+}
+
+function getCityForecastApiUrl(cityInput) {
+  return `${apiUrl}forecast?q=${cityInput}&appid=${apiKey}&units=metric`;
+}
+
+function getGeoForecastApiUrl(lat, lon) {
+  return `${apiUrl}forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 }
 
 function searchCity(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#search-city-input");
-  let h1 = document.querySelector("h1");
-  let city = cityInput.value;
-  let cityTitle = city
-    .toLowerCase()
-    .split(" ")
-    .map(s => s.charAt(0).toUpperCase() + s.substring(1))
-    .join(" ");
-  h1.innerHTML = cityTitle;
   let url = getCityApiUrl(cityInput.value);
-  axios.get(url).then(showSearchCurrentWeather);
-  /*.catch(function(error) {
-      console.log(error);
-    }); */
-  // still needs to be fixed
+  axios
+    .get(url)
+    .then(showSearchCurrentWeather)
+    .catch(function(error) {
+      alert("City not found");
+      getCurrentPosition();
+    });
 
   let forecastUrl = getCityForecastApiUrl(cityInput.value);
   axios.get(forecastUrl).then(showSearchForecast);
 }
+
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", searchCity);
 
 function showSearchCurrentWeather(response) {
   let lastUpdated = document.querySelector("#last-updated");
   lastUpdated.innerHTML = `Last updated: ${formatDate(
     response.data.dt * 1000
   )}`;
-
   showCurrentData(response);
   styleCelsius();
 }
 
+function showSearchForecast(response) {
+  showForecastData(response);
+}
+
 function showCurrentData(response) {
+  let h1 = document.querySelector("h1");
+  h1.innerHTML = response.data.name;
+
   currentTemperature = Math.round(response.data.main.temp);
   let temperatureNow = document.querySelector("#temperature-now");
   temperatureNow.innerHTML = currentTemperature;
@@ -172,28 +190,6 @@ function showForecastData(response) {
             </div>
   `;
   }
-}
-
-let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", searchCity);
-
-let apiKey = "f39b4d69b61752ac1179fb7a3b6a8e55";
-let apiUrl = "https://api.openweathermap.org/data/2.5/";
-
-function getCityApiUrl(cityInput) {
-  return `${apiUrl}weather?q=${cityInput}&appid=${apiKey}&units=metric`;
-}
-
-function getGeoApiUrl(lat, lon) {
-  return `${apiUrl}weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-}
-
-function getCityForecastApiUrl(cityInput) {
-  return `${apiUrl}forecast?q=${cityInput}&appid=${apiKey}&units=metric`;
-}
-
-function getGeoForecastApiUrl(lat, lon) {
-  return `${apiUrl}forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 }
 
 function styleUnselectedComponent(component) {
@@ -251,10 +247,6 @@ let celsius = document.querySelector("#celsius-scale");
 fahrenheit.addEventListener("click", showFahrenheit);
 celsius.addEventListener("click", showCelsius);
 
-function showGeoForecast(response) {
-  showForecastData(response);
-}
-
 function showPosition(position) {
   let url = getGeoApiUrl(position.coords.latitude, position.coords.longitude);
   axios.get(url).then(showGeoCurrentWeather);
@@ -266,19 +258,6 @@ function showPosition(position) {
   axios.get(forecastUrl).then(showGeoForecast);
 }
 
-function showGeoCurrentWeather(response) {
-  let h1 = document.querySelector("h1");
-  h1.innerHTML = response.data.name;
-
-  let lastUpdated = document.querySelector("#last-updated");
-  lastUpdated.innerHTML = `Last updated: ${formatDate(
-    response.data.dt * 1000
-  )}`;
-
-  showCurrentData(response);
-  styleCelsius();
-}
-
 function getCurrentPosition() {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
@@ -287,5 +266,18 @@ let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentPosition);
 
 getCurrentPosition();
+
+function showGeoCurrentWeather(response) {
+  let lastUpdated = document.querySelector("#last-updated");
+  lastUpdated.innerHTML = `Last updated: ${formatDate(
+    response.data.dt * 1000
+  )}`;
+  showCurrentData(response);
+  styleCelsius();
+}
+
+function showGeoForecast(response) {
+  showForecastData(response);
+}
 
 let currentTemperature = null;
