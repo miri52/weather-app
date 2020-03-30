@@ -30,6 +30,10 @@ ul {
   padding-left: 0;
 }
 
+#search-form {
+  margin-right: 10px;
+}
+
 .location-info-now {
   margin-bottom: 50px;
 }
