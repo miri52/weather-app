@@ -74,7 +74,7 @@ li::first-letter {
 .next-hours {
   display: block;
   text-align: center;
-  margin-bottom: 15px;
+  padding-left: 0 !important;
 }
 
 .time {
@@ -85,8 +85,13 @@ li::first-letter {
 .next-hours img {
   width: 50px;
   height: 50px;
-  margin: 10px auto;
+  margin: 0 auto;
   display: block;
+}
+
+.temperature {
+  margin-top: 5px;
+  margin-bottom: 15px;
 }
 
 .max-temperature {
