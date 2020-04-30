@@ -1,32 +1,32 @@
 let proverbs = {
   snow: {
     saying: "No snowflake ever falls in the wrong place.",
-    author: "-Zen proverb"
+    author: "-Zen proverb",
   },
   rain: {
     saying: "The sound of rain needs no translation.",
-    author: "-Zen proverb"
+    author: "-Zen proverb",
   },
   sun: {
     saying: "Turn your face to the sun and the shadows fall behind you.",
-    author: "-Maori proverb"
+    author: "-Maori proverb",
   },
   clouds: {
     saying: "A cloudy sky doesn't always cry rain.",
-    author: "-African proverb"
+    author: "-African proverb",
   },
   storm: {
     saying: "A tree with strong roots laughs at storms.",
-    author: "-Malay Proverb"
+    author: "-Malay proverb",
   },
   mist: {
     saying: "Words are the fog one has to see through.",
-    author: "-Zen proverb"
+    author: "-Zen proverb",
   },
   default: {
     saying: "After bad weather comes good weather.",
-    author: "-Maltese Proverb"
-  }
+    author: "-Maltese proverb",
+  },
 };
 
 function showProverb(mainDescription) {
@@ -74,7 +74,7 @@ function formatDate(timestamp) {
     "Wednesday",
     "Thursday",
     "Friday",
-    "Saturday"
+    "Saturday",
   ];
   let day = days[now.getDay()];
   return `${day} ${formatHours(timestamp)}`;
@@ -113,7 +113,7 @@ function searchCity(event) {
   axios
     .get(url)
     .then(showSearchCurrentWeather)
-    .catch(function(error) {
+    .catch(function (error) {
       alert("City not found");
       getCurrentPosition();
     });
@@ -171,10 +171,10 @@ function showForecastData(response) {
   forecast.innerHTML = null;
   let forecastDetails = null;
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 6; i++) {
     forecastDetails = response.data.list[i];
     forecast.innerHTML += `
-   <div class="col next-hours">
+   <div class="col-2 next-hours">
               <h3 class="time">${formatHours(forecastDetails.dt * 1000)}</h3>
               <img class="weather-icons" src="https://openweathermap.org/img/wn/${
                 forecastDetails.weather[0].icon
